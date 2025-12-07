@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "bmewburn.vscode-intelephense-client",
+    "xdebug.php-debug",
+    "formulahendry.auto-rename-tag",
+    "clinyong.vscode-css-modules",
+    "usernamehw.errorlens",
+    "dsznajder.es7-react-js-snippets",
+    "esbenp.prettier-vscode",
+    "whatwedo.twig"
+  ]
+}

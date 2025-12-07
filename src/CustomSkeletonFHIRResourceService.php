@@ -12,7 +12,7 @@
  * @license   https://github.com/openemr/openemr/blob/master/LICENSE GNU General Public License 3
  */
 
-namespace OpenEMR\Modules\CustomModuleSkeleton;
+namespace OpenEMR\Modules\CustomReactModuleSkeleton;
 
 use OpenEMR\FHIR\R4\FHIRDomainResource\FHIRProvenance;
 use OpenEMR\FHIR\R4\FHIRElement\FHIRId;
@@ -34,7 +34,7 @@ class CustomSkeletonFHIRResourceService extends FhirServiceBase implements IPati
     /**
      * If you'd prefer to keep out the empty methods that are doing nothing uncomment the following helper trait
      */
-//    use FhirServiceBaseEmptyTrait;
+    //    use FhirServiceBaseEmptyTrait;
 
     /**
      * @var CustomSkeletonDataStore The in memory sample data store we use for data population with our module
@@ -158,7 +158,7 @@ class CustomSkeletonFHIRResourceService extends FhirServiceBase implements IPati
     {
         // we don't return any provenance authorship for this custom resource
         // if we did return it, we would fill out the following record
-//        $provenance = new FHIRProvenance();
+        //        $provenance = new FHIRProvenance();
 
         return null;
     }

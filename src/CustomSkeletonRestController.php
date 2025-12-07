@@ -1,4 +1,5 @@
 <?php
+
 /**
  * FHIR Resource Controller example for handling and responding to
  *
@@ -10,7 +11,7 @@
  * @license   https://github.com/openemr/openemr/blob/master/LICENSE GNU General Public License 3
  */
 
-namespace OpenEMR\Modules\CustomModuleSkeleton;
+namespace OpenEMR\Modules\CustomReactModuleSkeleton;
 
 use OpenEMR\Common\Http\HttpRestRequest;
 use OpenEMR\Common\Http\HttpRestRouteHandler;
@@ -46,7 +47,7 @@ class CustomSkeletonRestController
      * @param HttpRestRequest
      * @return FHIRBundle
      */
-    public function listResources(HttpRestRequest $request) : FHIRBundle
+    public function listResources(HttpRestRequest $request): FHIRBundle
     {
 
         if ($request->isPatientRequest()) {
@@ -71,7 +72,7 @@ class CustomSkeletonRestController
      * @param HttpRestRequest $request
      * @return ResponseInterface
      */
-    public function getOneResource($fhirId, HttpRestRequest $request) : CustomSkeletonFHIRResource
+    public function getOneResource($fhirId, HttpRestRequest $request): CustomSkeletonFHIRResource
     {
         if ($request->isPatientRequest()) {
             // only allow access to data of binded patient

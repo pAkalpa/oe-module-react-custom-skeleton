@@ -14,11 +14,12 @@
  * @license   https://github.com/openemr/openemr/blob/master/LICENSE GNU General Public License 3
  */
 
-namespace OpenEMR\Modules\CustomModuleSkeleton;
+namespace OpenEMR\Modules\CustomReactModuleSkeleton;
 
 /**
  * Note the below use statements are importing classes from the OpenEMR core codebase
  */
+
 use OpenEMR\Common\Logging\SystemLogger;
 use OpenEMR\Common\Twig\TwigContainer;
 use OpenEMR\Core\Kernel;
@@ -36,13 +37,13 @@ use Twig\Error\LoaderError;
 use Twig\Loader\FilesystemLoader;
 
 // we import our own classes here.. although this use statement is unnecessary it forces the autoloader to be tested.
-use OpenEMR\Modules\CustomModuleSkeleton\CustomSkeletonRestController;
+use OpenEMR\Modules\CustomReactModuleSkeleton\CustomSkeletonRestController;
 
 
 class Bootstrap
 {
     const MODULE_INSTALLATION_PATH = "/interface/modules/custom_modules/";
-    const MODULE_NAME = "oe-module-custom-skeleton";
+    const MODULE_NAME = "oe-module-react-custom-skeleton";
     /**
      * @var EventDispatcherInterface The object responsible for sending and subscribing to events through the OpenEMR system
      */
@@ -95,11 +96,11 @@ class Bootstrap
         $this->addGlobalSettings();
 
         // we only add the rest of our event listeners and configuration if we have been fully setup and configured
-        if ($this->globalsConfig->isConfigured()) {
-            $this->registerMenuItems();
-            $this->registerTemplateEvents();
-            $this->subscribeToApiEvents();
-        }
+        $this->registerMenuItems();
+        // if ($this->globalsConfig->isConfigured()) {
+        //     $this->registerTemplateEvents();
+        //     $this->subscribeToApiEvents();
+        // }
     }
 
     /**
@@ -160,10 +161,10 @@ class Bootstrap
      */
     public function renderMainBodyScripts(RenderEvent $event)
     {
-        ?>
-        <link rel="stylesheet" href="<?php echo $this->getAssetPath();?>css/skeleton-module.css">
-        <script src="<?php echo $this->getAssetPath();?>js/skeleton-module.js"></script>
-        <?php
+?>
+        <link rel="stylesheet" href="<?php echo $this->getAssetPath(); ?>css/skeleton-module.css">
+        <script src="<?php echo $this->getAssetPath(); ?>js/skeleton-module.js"></script>
+<?php
     }
 
     /**
@@ -189,15 +190,15 @@ class Bootstrap
 
     public function registerMenuItems()
     {
-        if ($this->getGlobalConfig()->getGlobalSetting(GlobalConfig::CONFIG_ENABLE_MENU)) {
-            /**
-             * @var EventDispatcherInterface $eventDispatcher
-             * @var array $module
-             * @global                       $eventDispatcher @see ModulesApplication::loadCustomModule
-             * @global                       $module @see ModulesApplication::loadCustomModule
-             */
-            $this->eventDispatcher->addListener(MenuEvent::MENU_UPDATE, [$this, 'addCustomModuleMenuItem']);
-        }
+        $this->eventDispatcher->addListener(MenuEvent::MENU_UPDATE, [$this, 'addCustomModuleMenuItem']);
+        // if ($this->getGlobalConfig()->getGlobalSetting(GlobalConfig::CONFIG_ENABLE_MENU)) {
+        //     /**
+        //      * @var EventDispatcherInterface $eventDispatcher
+        //      * @var array $module
+        //      * @global                       $eventDispatcher @see ModulesApplication::loadCustomModule
+        //      * @global                       $module @see ModulesApplication::loadCustomModule
+        //      */
+        // }
     }
 
     public function addCustomModuleMenuItem(MenuEvent $event)
@@ -208,10 +209,10 @@ class Bootstrap
         $menuItem->requirement = 0;
         $menuItem->target = 'mod';
         $menuItem->menu_id = 'mod0';
-        $menuItem->label = xlt("Custom Module Skeleton");
+        $menuItem->label = xlt("Custom Module Skeleton (React) - Main");
         // TODO: pull the install location into a constant into the codebase so if OpenEMR changes this location it
         // doesn't break any modules.
-        $menuItem->url = "/interface/modules/custom_modules/oe-module-custom-skeleton/public/sample-index.php";
+        $menuItem->url = "/interface/modules/custom_modules/oe-module-react-custom-skeleton/public/index.php?tab_name=main";
         $menuItem->children = [];
 
         /**
@@ -242,9 +243,20 @@ class Bootstrap
          */
         $menuItem->global_req = [];
 
+        $menuItem2 = new \stdClass();
+        $menuItem2->requirement = 0;
+        $menuItem2->target = 'mod';
+        $menuItem2->menu_id = 'mod1';
+        $menuItem2->label = xlt("Custom Module Skeleton (React) - About Developer");
+        $menuItem2->url = "/interface/modules/custom_modules/oe-module-react-custom-skeleton/public/index.php?tab_name=About%20Developer#/about-dev";
+        $menuItem2->children = [];
+        $menuItem2->acl_req = [];
+        $menuItem2->global_req = [];
+
         foreach ($menu as $item) {
             if ($item->menu_id == 'modimg') {
                 $item->children[] = $menuItem;
+                $item->children[] = $menuItem2;
                 break;
             }
         }
@@ -292,8 +304,7 @@ class Bootstrap
             $scopes[] = 'user/CustomSkeletonResource.read';
             $scopes[] = 'patient/CustomSkeletonResource.read';
             // only add system scopes if they are actually enabled
-            if (\RestConfig::areSystemScopesEnabled())
-            {
+            if (\RestConfig::areSystemScopesEnabled()) {
                 $scopes[] = 'system/CustomSkeletonResource.read';
             }
             $event->setScopes($scopes);

@@ -1,19 +1,25 @@
 {
-  "name": "adunsulag/oe-module-custom-skeleton",
-  "description": "OpenEMR Custom Module Skeleton Starter Project",
+  "name": "pasinduakalpa/oe-module-react-custom-skeleton",
+  "description": "OpenEMR React Custom Module Skeleton Starter Project",
   "type": "openemr-module",
   "license": "GPL-3.0",
   "authors": [
     {
-      "name": "Stephen Nielson",
-      "email": "stephen@nielson.org",
+      "name": "Pasindu Akalpa",
+      "email": "pasinduakalpa1998@gmail.com",
+      "homepage": "https://github.com/pAkalpa",
       "role": "Developer"
     }
   ],
-  "keywords": ["openemr", "openemr-module"],
+  "keywords": [
+    "openemr",
+    "openemr-module"
+  ],
   "minimum-stability": "stable",
   "autoload": {
-    "psr-4": {"OpenEMR\\Modules\\CustomModuleSkeleton\\": "src/"}
+    "psr-4": {
+      "OpenEMR\\Modules\\CustomReactModuleSkeleton\\": "src/"
+    }
   },
   "require": {
     "openemr/oe-module-installer-plugin": "^0.1.0",

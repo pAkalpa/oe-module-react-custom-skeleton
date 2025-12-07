@@ -11,7 +11,7 @@
  * @license   https://github.com/openemr/openemr/blob/master/LICENSE GNU General Public License 3
  */
 
-namespace OpenEMR\Modules\CustomModuleSkeleton;
+namespace OpenEMR\Modules\CustomReactModuleSkeleton;
 
 class CustomSkeletonDataStore
 {
@@ -39,10 +39,8 @@ class CustomSkeletonDataStore
     {
         $dataStore = $this->getResourceDataStore();
         $result = [];
-        foreach ($dataStore as $record)
-        {
-            if ($record[$field] == $value)
-            {
+        foreach ($dataStore as $record) {
+            if ($record[$field] == $value) {
                 $result[] = $record;
             }
         }
@@ -56,9 +54,9 @@ class CustomSkeletonDataStore
     public function getResourceDataStore()
     {
         $resources = [
-            ['_id' => 1 ,'_message' => 'This is resource 1', '_patient' => 1]
-            ,['_id' => 2 ,'_message' => 'This is resource 2', '_patient' => 2]
-            ,['_id' => 3, '_message' => 'This is resource 3', '_patient' => 2]
+            ['_id' => 1, '_message' => 'This is resource 1', '_patient' => 1],
+            ['_id' => 2, '_message' => 'This is resource 2', '_patient' => 2],
+            ['_id' => 3, '_message' => 'This is resource 3', '_patient' => 2]
         ];
         return $resources;
     }
