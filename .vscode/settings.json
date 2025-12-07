@@ -1,0 +1,9 @@
+{
+  "intelephense.environment.includePaths": [
+    "/home/pasindu-akalpa/Projects/open_emr_extended/openemr", // Root directory of OpenEMR installation changed to match your setup
+    "/home/pasindu-akalpa/Projects/open_emr_extended/openemr/src", // Source code directory of OpenEMR installation changed to match your setup
+    "/home/pasindu-akalpa/Projects/open_emr_extended/openemr/vendor", // Vendor directory of OpenEMR installation changed to match your setup
+    "/home/pasindu-akalpa/Projects/open_emr_extended/openemr/library", // Library directory of OpenEMR installation changed to match your setup
+    "./vendor" // Local vendor directory relative to the workspace
+  ]
+}

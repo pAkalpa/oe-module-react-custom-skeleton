@@ -1,0 +1,25 @@
+{
+  // Use Chrome Debugger extension for more info: https://chromewebstore.google.com/detail/oiofkammbajfehgpleginfomeppgnglk
+  // Or Use Firefox Debugger extension for more info: https://addons.mozilla.org/en-US/firefox/addon/xdebug-helper-for-firefox/
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Listen for XDebug",
+      "type": "php",
+      "request": "launch",
+      "port": 9003,
+      "pathMappings": {
+        "/var/www/localhost/htdocs/openemr/interface/modules/custom_modules/oe-module-react-custom-skeleton": "${workspaceFolder}"
+      },
+      "ignore": ["**/vendor/**/*.php"]
+    },
+    {
+      "name": "Launch currently open script",
+      "type": "php",
+      "request": "launch",
+      "program": "${file}",
+      "cwd": "${fileDirname}",
+      "port": 9003
+    }
+  ]
+}

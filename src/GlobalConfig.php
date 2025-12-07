@@ -14,7 +14,7 @@
  * @license   https://github.com/openemr/openemr/blob/master/LICENSE GNU General Public License 3
  */
 
-namespace OpenEMR\Modules\CustomModuleSkeleton;
+namespace OpenEMR\Modules\CustomReactModuleSkeleton;
 
 use OpenEMR\Common\Crypto\CryptoGen;
 use OpenEMR\Services\Globals\GlobalSetting;
@@ -27,6 +27,7 @@ class GlobalConfig
     const CONFIG_ENABLE_MENU = "oe_skeleton_add_menu_button";
     const CONFIG_ENABLE_BODY_FOOTER = "oe_skeleton_add_body_footer";
     const CONFIG_ENABLE_FHIR_API = "oe_skeleton_enable_fhir_api";
+    const CONFIG_ENABLE_DEVELOPMENT_MODE = "oe_skeleton_enable_development_mode";
 
     private $globalsArray;
 
@@ -77,45 +78,56 @@ class GlobalConfig
         return $this->globalsArray[$settingKey] ?? null;
     }
 
+    public function isDevelopmentModeEnabled()
+    {
+        return !empty($this->globalsArray[self::CONFIG_ENABLE_DEVELOPMENT_MODE]);
+    }
+
     public function getGlobalSettingSectionConfiguration()
     {
         $settings = [
             self::CONFIG_OPTION_TEXT => [
-                'title' => 'Skeleton Module Text Option'
-                ,'description' => 'Example global config option with text'
-                ,'type' => GlobalSetting::DATA_TYPE_TEXT
-                ,'default' => ''
-            ]
-            ,self::CONFIG_OPTION_ENCRYPTED => [
-                'title' => 'Skeleton Module Encrypted Option (Encrypted)'
-                ,'description' => 'Example of adding an encrypted global configuration value for your module.  Used for sensitive data'
-                ,'type' => GlobalSetting::DATA_TYPE_ENCRYPTED
-                ,'default' => ''
-            ]
-            ,self::CONFIG_OVERRIDE_TEMPLATES => [
-                'title' => 'Skeleton Module enable overriding twig files'
-                ,'description' => 'Shows example of overriding a twig file'
-                ,'type' => GlobalSetting::DATA_TYPE_BOOL
-                ,'default' => ''
-            ]
-            ,self::CONFIG_ENABLE_MENU => [
-                'title' => 'Skeleton Module add module menu item'
-                ,'description' => 'Shows example of adding a menu item to the system (requires logging out and logging in again)'
-                ,'type' => GlobalSetting::DATA_TYPE_BOOL
-                ,'default' => ''
-            ]
-            ,self::CONFIG_ENABLE_BODY_FOOTER => [
-                'title' => 'Skeleton Module Enable Body Footer example.'
-                ,'description' => 'Shows example of adding a menu item to the system (requires logging out and logging in again)'
-                ,'type' => GlobalSetting::DATA_TYPE_BOOL
-                ,'default' => ''
-            ]
-            ,self::CONFIG_ENABLE_FHIR_API => [
-                'title' => 'Skeleton Module Enable FHIR API Extension example.'
-                ,'description' => 'Shows example of extending the FHIR api with the skeleton module.'
-                ,'type' => GlobalSetting::DATA_TYPE_BOOL
-                ,'default' => ''
-            ]
+                'title' => 'Skeleton Module Text Option',
+                'description' => 'Example global config option with text',
+                'type' => GlobalSetting::DATA_TYPE_TEXT,
+                'default' => ''
+            ],
+            self::CONFIG_OPTION_ENCRYPTED => [
+                'title' => 'Skeleton Module Encrypted Option (Encrypted)',
+                'description' => 'Example of adding an encrypted global configuration value for your module.  Used for sensitive data',
+                'type' => GlobalSetting::DATA_TYPE_ENCRYPTED,
+                'default' => ''
+            ],
+            self::CONFIG_OVERRIDE_TEMPLATES => [
+                'title' => 'Skeleton Module enable overriding twig files',
+                'description' => 'Shows example of overriding a twig file',
+                'type' => GlobalSetting::DATA_TYPE_BOOL,
+                'default' => ''
+            ],
+            self::CONFIG_ENABLE_MENU => [
+                'title' => 'Skeleton Module add module menu item',
+                'description' => 'Shows example of adding a menu item to the system (requires logging out and logging in again)',
+                'type' => GlobalSetting::DATA_TYPE_BOOL,
+                'default' => ''
+            ],
+            self::CONFIG_ENABLE_BODY_FOOTER => [
+                'title' => 'Skeleton Module Enable Body Footer example.',
+                'description' => 'Shows example of adding a menu item to the system (requires logging out and logging in again)',
+                'type' => GlobalSetting::DATA_TYPE_BOOL,
+                'default' => ''
+            ],
+            self::CONFIG_ENABLE_FHIR_API => [
+                'title' => 'Skeleton Module Enable FHIR API Extension example.',
+                'description' => 'Shows example of extending the FHIR api with the skeleton module.',
+                'type' => GlobalSetting::DATA_TYPE_BOOL,
+                'default' => ''
+            ],
+            self::CONFIG_ENABLE_DEVELOPMENT_MODE => [
+                'title' => 'Skeleton Module Enable Development Mode.',
+                'description' => 'Enables development mode for the skeleton module.  This allows loading assets from vite dev server.',
+                'type' => GlobalSetting::DATA_TYPE_BOOL,
+                'default' => false
+            ],
         ];
         return $settings;
     }

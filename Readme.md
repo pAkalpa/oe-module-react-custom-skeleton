@@ -61,5 +61,114 @@ Once your module is installed in OpenEMR custom_modules folder you can activate 
   5. Now click the *Install* button next your module name.
   6. Finally click the *Enable* button for your module.
 
+## React UI Development
+
+This module includes a modern React + TypeScript + Vite frontend setup in the `ui/` directory. The React application integrates seamlessly with OpenEMR and supports both development and production modes.
+
+### Technology Stack
+- **React 19** - Modern React with latest features
+- **TypeScript** - Type-safe development
+- **Vite** - Fast build tool and dev server
+- **React Router** - Client-side routing with hash-based navigation
+- **pnpm** - Fast, disk space efficient package manager
+
+### Running the React App in Development Mode
+
+1. **Navigate to the UI directory:**
+   ```bash
+   cd ui
+   ```
+
+2. **Install dependencies (first time only):**
+   ```bash
+   pnpm install
+   ```
+
+3. **Start the Vite development server:**
+   ```bash
+   pnpm dev
+   ```
+   The dev server will start at `http://localhost:5173` with Hot Module Replacement (HMR) enabled.
+
+4. **Enable development mode in OpenEMR:**
+   
+   Set the environment variable `EASY_DEV_MODE=yes` and ensure development mode is enabled in your module's global settings. When in dev mode, the module will load assets from the Vite dev server instead of the built files.
+
+### Building for Production
+
+To create an optimized production build:
+
+```bash
+cd ui
+pnpm build
+```
+
+This will:
+- Compile TypeScript and bundle your React application
+- Generate optimized, minified assets
+- Output files to `../public/assets/react-app/` 
+- Create a manifest file for asset loading
+
+### Project Structure
+
+```
+ui/
+├── src/
+│   ├── main.tsx          # Application entry point with routing
+│   ├── App.tsx           # Main App component
+│   ├── globals.d.ts      # TypeScript global declarations
+│   └── assets/           # Static assets (images, etc.)
+├── public/               # Static files served as-is
+├── package.json          # Dependencies and scripts
+├── vite.config.ts        # Vite configuration
+├── tsconfig.json         # TypeScript configuration
+└── pnpm-lock.yaml        # Dependency lock file
+```
+
+### Available Routes
+
+The React app uses hash-based routing:
+- `/#/` - Main application page
+- `/#/about-dev` - About developer page
+- `/#/*` - 404 not found page
+
+### Integration with OpenEMR
+
+The React app receives OpenEMR context through `window.openemrData`:
+- `user_id` - Current OpenEMR user ID
+- `base_url` - OpenEMR web root
+- `csrf_token` - CSRF token for API requests
+- `language` - User's language preference
+- `site_id` - OpenEMR site ID
+
+## Changes and Enhancements
+
+This fork includes the following enhancements over the original skeleton:
+
+### React Frontend Integration
+- Complete React + TypeScript + Vite setup for modern frontend development
+- Development and production mode support with hot module replacement
+- Hash-based routing for client-side navigation
+- TypeScript type definitions for OpenEMR integration
+- Build configuration optimized for OpenEMR module structure
+
+### UI Development Workflow
+- Fast development server with HMR at port 5173
+- Automatic asset bundling and optimization
+- Manifest-based asset loading in production
+- CORS configuration for development mode
+- Source maps for easier debugging
+
+### Developer Experience
+- Modern tooling with pnpm for faster installs
+- ESLint configuration for code quality
+- TypeScript for type safety
+- React 19 with latest features
+- Sample routes and components to get started quickly
+
 ## Contributing
 If you would like to help in improving the skeleton library just post an issue on Github or send a pull request.
+
+### Contributors
+- **Original Author**: [adunsulag](https://github.com/adunsulag)
+- **React Integration**: [Pasindu Akalpa](https://github.com/pAkalpa) - Added React + Vite setup, TypeScript configuration, and development workflow
